@@ -6,7 +6,7 @@
 /*   By: mbennani <mbennani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:48:36 by mbennani          #+#    #+#             */
-/*   Updated: 2023/01/17 16:02:01 by mbennani         ###   ########.fr       */
+/*   Updated: 2023/01/19 06:09:06 by mbennani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	my_mlx_pixel_put(t_data *data, int xi, int yi, int color)
 
 void put_x(t_fdf *mats)
 {
-	mats->drawer.x0 = mats->vecs[mats->drawer.i - 1]->data[0][0];
-	mats->drawer.y0 = mats->vecs[mats->drawer.i - 1]->data[1][0];
-	mats->drawer.x1 = mats->vecs[mats->drawer.i]->data[0][0];
-	mats->drawer.y1 = mats->vecs[mats->drawer.i]->data[1][0];
+	mats->drawer.x0 = mats->vecs[mats->drawer.i - 1]->data[X][0];
+	mats->drawer.y0 = mats->vecs[mats->drawer.i - 1]->data[Y][0];
+	mats->drawer.x1 = mats->vecs[mats->drawer.i]->data[X][0];
+	mats->drawer.y1 = mats->vecs[mats->drawer.i]->data[Y][0];
 	mats->drawer.dx = mats->drawer.x1 - mats->drawer.x0;
 	mats->drawer.dy = mats->drawer.y1 - mats->drawer.y0;
 	if (fabs(mats->drawer.dx) > fabs(mats->drawer.dy))
@@ -37,7 +37,7 @@ void put_x(t_fdf *mats)
 	mats->drawer.j = -1;
 	while (++mats->drawer.j <= mats->drawer.step)
 	{
-		if(mats->origin->data[0][0] + mats->drawer.x0 > x || mats->origin->data[0][0] + mats->drawer.x0 < 0 || mats->origin->data[1][0] - mats->drawer.y0 < 0 || mats->origin->data[1][0] - mats->drawer.y0 > y)
+		if(mats->origin->data[X][0] + mats->drawer.x0 > XWIN || mats->origin->data[X][0] + mats->drawer.x0 < 0 || mats->origin->data[Y][0] - mats->drawer.y0 < 0 || mats->origin->data[Y][0] - mats->drawer.y0 > YWIN)
 			return ;
 		colorseve(mats->color, mats);
 		mats->drawer.x0 = mats->drawer.x0 + mats->drawer.xinc;
@@ -49,10 +49,10 @@ void put_x(t_fdf *mats)
 
 void put_y(t_fdf *mats)
 {
-	mats->drawer.x1 = mats->vecs[mats->drawer.i - 1]->data[0][0];
-	mats->drawer.y1 = mats->vecs[mats->drawer.i - 1]->data[1][0];
-	mats->drawer.x0 = mats->vecs[mats->drawer.i + mats->width - 1]->data[0][0];
-	mats->drawer.y0 = mats->vecs[mats->drawer.i + mats->width - 1]->data[1][0];
+	mats->drawer.x1 = mats->vecs[mats->drawer.i - 1]->data[X][0];
+	mats->drawer.y1 = mats->vecs[mats->drawer.i - 1]->data[Y][0];
+	mats->drawer.x0 = mats->vecs[mats->drawer.i + mats->width - 1]->data[X][0];
+	mats->drawer.y0 = mats->vecs[mats->drawer.i + mats->width - 1]->data[Y][0];
 	mats->drawer.dx = mats->drawer.x1 - mats->drawer.x0;
 	mats->drawer.dy = mats->drawer.y1 - mats->drawer.y0;
 	if (fabs(mats->drawer.dx) > fabs(mats->drawer.dy))
@@ -64,7 +64,7 @@ void put_y(t_fdf *mats)
 	mats->drawer.j = -1;
 	while (++mats->drawer.j <= mats->drawer.step)
 	{
-		if(mats->origin->data[0][0] + mats->drawer.x0 > x || mats->origin->data[0][0] + mats->drawer.x0 < 0 || mats->origin->data[1][0] - mats->drawer.y0 < 0 || mats->origin->data[1][0] - mats->drawer.y0 > y)
+		if(mats->origin->data[X][0] + mats->drawer.x0 > XWIN || mats->origin->data[X][0] + mats->drawer.x0 < 0 || mats->origin->data[Y][0] - mats->drawer.y0 < 0 || mats->origin->data[Y][0] - mats->drawer.y0 > YWIN)
 			return ;
 		colorseve(mats->color, mats);
 		mats->drawer.x0 = mats->drawer.x0 + mats->drawer.xinc;
@@ -72,10 +72,11 @@ void put_y(t_fdf *mats)
 	}
 }
 
+
 void draw_frame(t_fdf *mats)
 {
 	mlx_destroy_image(mats->mlx, mats->img.img);
-	mats->img.img = mlx_new_image(mats->mlx, x, y);
+	mats->img.img = mlx_new_image(mats->mlx, XWIN, YWIN);
 	mats->img.addr = mlx_get_data_addr(mats->img.img, &mats->img.bits_per_pixel, &mats->img.line_length,
 								&mats->img.endian);
 	mats->drawer.i = 0;
@@ -85,4 +86,7 @@ void draw_frame(t_fdf *mats)
 	while (++mats->drawer.i < mats->area - mats->width + 1)
 		put_y(mats);
 	mlx_put_image_to_window(mats->mlx, mats->win, mats->img.img, 0, 0);
+	epic_spellbook(mats);
+	mlx_string_put(mats->mlx, mats->win, 150, 437, 0xFF0000, "!! MORE FEATURES WILL BE ADDED NEXT RELEASE !!");
+	mlx_string_put(mats->mlx, mats->win, XWIN - 300, YWIN - 30, 0xFFFF00, "Y0U SHAAAALL N00T PAAASSS!!");
 }

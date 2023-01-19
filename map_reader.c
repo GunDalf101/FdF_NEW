@@ -6,7 +6,7 @@
 /*   By: mbennani <mbennani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:45:14 by mbennani          #+#    #+#             */
-/*   Updated: 2023/01/17 19:20:55 by mbennani         ###   ########.fr       */
+/*   Updated: 2023/01/19 03:42:08 by mbennani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ nml_mat	**vector_maker(t_fdf *mats)
 		j = 0;
 		while (j < mats->width)
 		{
-			vectors[i * mats->width + j] = nml_mat_new(3, 1); 
-			vectors[i * mats->width + j]->data[0][0] = j * mats->i->data[0][0] \
-			+ i * mats->j->data[0][0] + mats->map[i][j] * mats->k->data[0][0];
-			vectors[i * mats->width + j]->data[1][0] = j * mats->i->data[1][0] \
-			+ i * mats->j->data[1][0]+ mats->map[i][j] * mats->k->data[1][0];
-			vectors[i * mats->width + j]->data[2][0] = mats->map[i][j];
+			vectors[i * mats->width + j] = nml_mat_new(3, 1);
+			vectors[i * mats->width + j]->data[X][0] = j * mats->i->data[X][0] \
+			+ i * mats->j->data[X][0] + mats->map[i][j] * mats->k->data[X][0];
+			vectors[i * mats->width + j]->data[Y][0] = j * mats->i->data[Y][0] \
+			+ i * mats->j->data[Y][0]+ mats->map[i][j] * mats->k->data[Y][0];
+			vectors[i * mats->width + j]->data[Z][0] = mats->map[i][j];
 			j++;
 		}
 		i++;
@@ -106,11 +106,11 @@ void	vector_trans(t_fdf *mats)
 		j = 0;
 		while (j < mats->width)
 		{
-			mats->vecs[i * mats->width + j]->data[0][0] = (j - mats->width / 2) * mats->i->data[0][0] \
-			+ (i - mats->height / 2) * mats->j->data[0][0] + mats->map[i][j] * mats->k->data[0][0];
-			mats->vecs[i * mats->width + j]->data[1][0] = (j - mats->width / 2) * mats->i->data[1][0] \
-			+ (i - mats->height / 2) * mats->j->data[1][0] + mats->map[i][j] * mats->k->data[1][0];
-			mats->vecs[i * mats->width + j]->data[2][0] = mats->map[i][j];
+			mats->vecs[i * mats->width + j]->data[X][0] = (j - mats->width / 2) * mats->i->data[X][0] \
+			+ (i - mats->height / 2) * mats->j->data[X][0] + mats->map[i][j] * mats->k->data[X][0];
+			mats->vecs[i * mats->width + j]->data[Y][0] = (j - mats->width / 2) * mats->i->data[Y][0] \
+			+ (i - mats->height / 2) * mats->j->data[Y][0] + mats->map[i][j] * mats->k->data[Y][0];
+			mats->vecs[i * mats->width + j]->data[Z][0] = mats->map[i][j];
 			j++;
 		}
 		i++;

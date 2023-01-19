@@ -6,7 +6,7 @@
 /*   By: mbennani <mbennani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 06:00:06 by mbennani          #+#    #+#             */
-/*   Updated: 2023/01/17 17:45:02 by mbennani         ###   ########.fr       */
+/*   Updated: 2023/01/19 05:23:06 by mbennani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int colorseve(int keycode,t_fdf *mats)
 {
 	mats->color = keycode;
 	if	(keycode == 18)
-		my_mlx_pixel_put(&mats->img ,	mats->origin->data[0][0] + mats->drawer.x0, mats->origin->data[1][0] - mats->drawer.y0 , 0xFFFFFF);
+		my_mlx_pixel_put(&mats->img ,	mats->origin->data[0][0] + mats->drawer.x0, mats->origin->data[1][0] - mats->drawer.y0 , 0xfffafa);
 	else if(keycode == 19)
 		red_green(mats);
 	else if (keycode == 20)
@@ -66,13 +66,13 @@ void val_init(t_fdf *mats)
 	mats->i = nml_mat_new(3, 1);
 	mats->j = nml_mat_new(3, 1);
 	mats->k = nml_mat_new(3, 1);
-	mats->origin->data[0][0] = x / 2;
-	mats->origin->data[1][0] = y / 2;
+	mats->origin->data[0][0] = XWIN / 2;
+	mats->origin->data[1][0] = YWIN / 2;
 	mats->origin->data[2][0] = 0;
-	mats->A = x;
+	mats->A = XWIN;
 	mats->B = mats->width;
-	if (x > y)
-		mats->A = y;
+	if (XWIN > YWIN)
+		mats->A = YWIN;
 	if(mats->width < mats->height)
 		mats->B = mats->height;
 	rotx_init(mats);
@@ -90,8 +90,8 @@ int main (int ac, char **av)
 		if (mats.fd == -1)
 			return (ft_printf("Error 1: File Error\n"), 1);
 		mats.mlx = mlx_init();
-		mats.win =  mlx_new_window(mats.mlx, x, y, "EPIC 3D PROJECT");
-		mats.img.img = mlx_new_image(mats.mlx, x, y);
+		mats.win =  mlx_new_window(mats.mlx, XWIN, YWIN, "EPIC 3D PROJECT");
+		mats.img.img = mlx_new_image(mats.mlx, XWIN, YWIN);
 		mats.img.addr = mlx_get_data_addr(mats.img.img, &mats.img.bits_per_pixel, 
 								&mats.img.line_length, &mats.img.endian);
 		val_init(&mats);

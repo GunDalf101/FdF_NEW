@@ -6,7 +6,7 @@
 /*   By: mbennani <mbennani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 06:00:01 by mbennani          #+#    #+#             */
-/*   Updated: 2023/01/17 18:26:13 by mbennani         ###   ########.fr       */
+/*   Updated: 2023/01/19 05:32:59 by mbennani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,32 @@
 # include <mlx.h>
 # include <fcntl.h>
 # include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <time.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include <time.h>
 
-# define x 2000
-# define y 1000
+# define XWIN 2300
+# define YWIN 1300
 # define ZOOM 1.1
 # define TRANSLATION 20
 # define ROTANGLE 0.05
 # define RATIO 60
-# define ZRATIO 1
+# define ZRATIO 0.5
+
+# define X 0
+# define Y 1
+# define Z 2
+
+# define THETA 0
+# define PHI 1
+
+typedef struct	s_sphere {
+	struct nml_mat_s	**sphecs;
+	struct nml_mat_s	**polar_cord;
+	double				radius;
+}				t_sphere;
 
 typedef struct	s_data {
 	void	*img;
@@ -67,6 +80,7 @@ typedef struct s_fdf {
 	int					area;
 	int					**map;
 	struct nml_mat_s	**vecs;
+	t_sphere			sphere;
 	struct nml_mat_s	*rotmatz;
 	struct nml_mat_s	*rotmatx;
 	struct nml_mat_s	*rotmaty;
@@ -104,6 +118,9 @@ void	red_green(t_fdf *mats);
 int		colorseve(int keycode,t_fdf *mats);
 void	scorched_earth(t_fdf *mats);
 void	my_mlx_pixel_put(t_data *data, int xi, int yi, int color);
+void	epic_spellbook(t_fdf *mats);
+void	print_str(t_fdf *mats, int x, int y, char *str);
+void	print_nbr(t_fdf *mats, int x, int y, int nbr);
 
 #endif
 

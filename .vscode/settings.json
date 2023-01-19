@@ -18,7 +18,23 @@
 		"ios": "c",
 		"iterator": "c",
 		"unordered_map": "c",
-		"time.h": "c"
+		"time.h": "c",
+		"__config": "c",
+		"__debug": "c",
+		"algorithm": "c",
+		"bitset": "c",
+		"chrono": "c",
+		"cmath": "c",
+		"complex": "c",
+		"functional": "c",
+		"istream": "c",
+		"memory": "c",
+		"mutex": "c",
+		"ostream": "c",
+		"sstream": "c",
+		"tuple": "c",
+		"utility": "c",
+		"atomic": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }

@@ -6,7 +6,7 @@
 /*   By: mbennani <mbennani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 13:33:38 by mbennani          #+#    #+#             */
-/*   Updated: 2022/12/19 08:35:58 by mbennani         ###   ########.fr       */
+/*   Updated: 2023/01/19 05:08:35 by mbennani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	rotationz(int keycode, t_fdf *mats)
 	nml_mat *tempi;
 	nml_mat *tempj;
 	nml_mat *tempk;
-	if (keycode == 14)
-		mats->angle = - ROTANGLE;
 	if (keycode == 12)
+		mats->angle = - ROTANGLE;
+	if (keycode == 14)
 		mats->angle = ROTANGLE;
 	rotz_init(mats);
 	tempi = nml_mat_dot(mats->rotmatz, mats->i);
@@ -73,14 +73,14 @@ int	rotationz(int keycode, t_fdf *mats)
 
 int	translation(int keycode, t_fdf *mats)
 {
-	if (keycode == 126)
-		mats->origin->data[1][0] -= TRANSLATION;		
 	if (keycode == 125)
-		mats->origin->data[1][0] += TRANSLATION;
-	if (keycode == 124)
-		mats->origin->data[0][0] += TRANSLATION;
+		mats->origin->data[Y][0] -= TRANSLATION;		
+	if (keycode == 126)
+		mats->origin->data[Y][0] += TRANSLATION;
 	if (keycode == 123)
-		mats->origin->data[0][0] -= TRANSLATION;
+		mats->origin->data[X][0] += TRANSLATION;
+	if (keycode == 124)
+		mats->origin->data[X][0] -= TRANSLATION;
 	return (0);
 }
 

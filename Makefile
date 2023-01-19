@@ -6,7 +6,9 @@ SRCS = coolorspal.c \
 	map_reader.c \
 	mat_init.c \
 	transformations.c\
-	views.c
+	views.c \
+	addons.c \
+	utils.c
 
 OBJS = $(SRCS:.c=.o)
 INCS = fdf.h
@@ -43,7 +45,7 @@ fclean: clean
 	make -C linear_alg fclean
 	make -C gnl fclean
 	make -C ft_printf fclean
-	rm -f client server client_bonus server_bonus
+	rm -f $(NAME)
 
 re: fclean all
 
