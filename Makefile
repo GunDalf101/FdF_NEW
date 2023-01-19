@@ -8,7 +8,8 @@ SRCS = coolorspal.c \
 	transformations.c\
 	views.c \
 	addons.c \
-	utils.c
+	utils.c \
+	battleground.c
 
 OBJS = $(SRCS:.c=.o)
 INCS = fdf.h

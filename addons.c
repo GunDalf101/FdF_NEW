@@ -6,7 +6,7 @@
 /*   By: mbennani <mbennani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 05:15:11 by mbennani          #+#    #+#             */
-/*   Updated: 2023/01/19 06:07:02 by mbennani         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:30:54 by mbennani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void second_wind(t_fdf *mats)
 	print_str(mats, SECOND_PAGE, line, "3 = FLAT EARTH");
 	line += LINE_SIZE;
 	print_str(mats, SECOND_PAGE, line, "4 = SCORCHED EARTH");
+	line += LINE_SIZE;
+	print_str(mats, SECOND_PAGE, line, "5 = BLOOD REALM");
 	line += LINE_SIZE;
 	print_str(mats, SECOND_PAGE, line, "//MAP INFO:");
 	line += LINE_SIZE;

@@ -6,17 +6,30 @@
 /*   By: mbennani <mbennani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 06:00:06 by mbennani          #+#    #+#             */
-/*   Updated: 2023/01/19 05:23:06 by mbennani         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:23:33 by mbennani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+int changeback(int keycode,t_fdf *mats)
+{
+	if	(keycode == 82)
+		mats->background = 0;
+	else if(keycode == 83)
+		mats->background = 1;
+	else if (keycode == 84)
+		mats->background = 2;
+	else if (keycode == 85)
+		mats->background = 3;
+	return (keycode);
+}
+
 int colorseve(int keycode,t_fdf *mats)
 {
 	mats->color = keycode;
 	if	(keycode == 18)
-		my_mlx_pixel_put(&mats->img ,	mats->origin->data[0][0] + mats->drawer.x0, mats->origin->data[1][0] - mats->drawer.y0 , 0xfffafa);
+		my_mlx_pixel_put(&mats->img , mats->origin->data[0][0] + mats->drawer.x0, mats->origin->data[1][0] - mats->drawer.y0 , 0xfffafa);
 	else if(keycode == 19)
 		red_green(mats);
 	else if (keycode == 20)
@@ -24,9 +37,9 @@ int colorseve(int keycode,t_fdf *mats)
 	else if (keycode == 21)
 		scorched_earth(mats);
 	else if (keycode == 22)
-		my_mlx_pixel_put(&mats->img ,	mats->origin->data[0][0] + mats->drawer.x0, mats->origin->data[1][0] - mats->drawer.y0 , 0x4a0495);
+		my_mlx_pixel_put(&mats->img , mats->origin->data[0][0] + mats->drawer.x0, mats->origin->data[1][0] - mats->drawer.y0 , 0x000000);
 	else if (keycode == 23)
-		my_mlx_pixel_put(&mats->img ,	mats->origin->data[0][0] + mats->drawer.x0, mats->origin->data[1][0] - mats->drawer.y0 , 0xf1d51f);
+		castelvania(mats);
 	return (keycode);
 }
 
@@ -38,7 +51,7 @@ int key_hooks(int keycode, t_fdf *mats)
 		rotationy(keycode, mats);
 	if (keycode == 14 || keycode == 12)
 		rotationz(keycode, mats);
-	if (keycode == 126 || keycode == 125 || keycode == 124 || keycode == 123)
+	if (keycode >= 123 && keycode <= 126)
 		translation(keycode, mats);
 	if (keycode == 6 || keycode == 8)
 		zoom(keycode, mats);
@@ -48,6 +61,8 @@ int key_hooks(int keycode, t_fdf *mats)
 		xview(keycode, mats);
 	if (keycode == 16)
 		yview(keycode, mats);
+	if (keycode > 81 && keycode <= 89)
+		changeback(keycode, mats);	
 	if (keycode > 17 && keycode < 24)
 		colorseve(keycode, mats);
 	if (keycode == 53)
@@ -60,7 +75,8 @@ int key_hooks(int keycode, t_fdf *mats)
 void val_init(t_fdf *mats)
 {
 	maps_dims(mats);
-	 mats->color = 18;
+	mats->background = 0; 
+	mats->color = 18;
 	mats->area = mats->width * mats->height;
 	mats->origin = nml_mat_new(3, 1);
 	mats->i = nml_mat_new(3, 1);

@@ -6,7 +6,7 @@
 /*   By: mbennani <mbennani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 06:00:01 by mbennani          #+#    #+#             */
-/*   Updated: 2023/01/19 05:32:59 by mbennani         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:29:00 by mbennani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define TRANSLATION 20
 # define ROTANGLE 0.05
 # define RATIO 60
-# define ZRATIO 0.5
+# define ZRATIO 2
 
 # define X 0
 # define Y 1
@@ -70,6 +70,7 @@ typedef struct	s_dda {
 }				t_dda;
 
 typedef struct s_fdf {
+	int					background;
 	void				*mlx;
 	void				*win;
 	t_data				img;
@@ -121,6 +122,11 @@ void	my_mlx_pixel_put(t_data *data, int xi, int yi, int color);
 void	epic_spellbook(t_fdf *mats);
 void	print_str(t_fdf *mats, int x, int y, char *str);
 void	print_nbr(t_fdf *mats, int x, int y, int nbr);
+void 	castelvania(t_fdf *mats);
+void	white_back(t_fdf *mats);
+void	gimme_grey(t_fdf *mats);
+void	sky_high(t_fdf *mats);
+
 
 #endif
 

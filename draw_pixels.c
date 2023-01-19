@@ -6,7 +6,7 @@
 /*   By: mbennani <mbennani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:48:36 by mbennani          #+#    #+#             */
-/*   Updated: 2023/01/19 06:09:06 by mbennani         ###   ########.fr       */
+/*   Updated: 2023/01/19 09:30:27 by mbennani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,17 @@ void put_y(t_fdf *mats)
 	}
 }
 
+void backgroundc(t_fdf *mats)
+{
+	if (mats->background == 0)
+		return ;
+	else if (mats->background == 1)
+		white_back(mats);
+	else if (mats->background == 2)
+		gimme_grey(mats);
+	else if (mats->background == 3)
+		sky_high(mats);
+}
 
 void draw_frame(t_fdf *mats)
 {
@@ -79,6 +90,7 @@ void draw_frame(t_fdf *mats)
 	mats->img.img = mlx_new_image(mats->mlx, XWIN, YWIN);
 	mats->img.addr = mlx_get_data_addr(mats->img.img, &mats->img.bits_per_pixel, &mats->img.line_length,
 								&mats->img.endian);
+	backgroundc(mats);
 	mats->drawer.i = 0;
 	while (++mats->drawer.i < mats->area)
 		put_x(mats);
