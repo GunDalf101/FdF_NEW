@@ -10,15 +10,17 @@ SRCS = coolorspal.c \
 	addons.c \
 	utils.c \
 	battleground.c
+SRCS_BONUS = $(SRCS:%.c=fdf_bonus/%_bonus.c)
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:%.c=%.o)
+OBJS_BONUS = $(OBJS:%.o=fdf_bonus/%_bonus.o)
 INCS = fdf.h
 LIBFT = libft/libft.a
 GNL = gnl/gnl.a
 PRINTF = ft_printf/libftprintf.a
 LINEAR = linear_alg/linear_alg.a
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 MINIFLAGS = -lmlx -framework OpenGL -framework AppKit
 
@@ -31,7 +33,17 @@ $(NAME):$(OBJS)
 	make -C ft_printf
 	$(CC) -o $@ $(OBJS) $(LIBFT) $(GNL) $(PRINTF) $(LINEAR) $(MINIFLAGS)
 
-%.o: %.c $(INCS)
+bonus: $(OBJS_BONUS)
+	make -C libft
+	make -C linear_alg
+	make -C gnl
+	make -C ft_printf
+	$(CC) -o $@ $(OBJS_BONUS) $(LIBFT) $(GNL) $(PRINTF) $(LINEAR) $(MINIFLAGS)
+
+OBJS: $(SRCS) $(INCS)
+	$(CC) -c $(CFLAGS) $<
+
+OBJS_BONUS: $(SRCS_BONUS) $(INCS)
 	$(CC) -c $(CFLAGS) $<
 
 clean:
@@ -39,14 +51,14 @@ clean:
 	make -C linear_alg clean
 	make -C gnl clean
 	make -C ft_printf clean
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
 	make -C libft fclean
 	make -C linear_alg fclean
 	make -C gnl fclean
 	make -C ft_printf fclean
-	rm -f $(NAME)
+	rm -f $(NAME) bonus
 
 re: fclean all
 

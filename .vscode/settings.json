@@ -34,7 +34,11 @@
 		"sstream": "c",
 		"tuple": "c",
 		"utility": "c",
-		"atomic": "c"
+		"atomic": "c",
+		"locale": "c",
+		"typeinfo": "c",
+		"new": "c",
+		"type_traits": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }

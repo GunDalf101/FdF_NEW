@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   antileak.c                                         :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbennani <mbennani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 10:23:59 by mbennani          #+#    #+#             */
-/*   Updated: 2023/01/22 20:41:06 by mbennani         ###   ########.fr       */
+/*   Created: 2023/01/19 05:16:04 by mbennani          #+#    #+#             */
+/*   Updated: 2023/01/22 23:22:51 by mbennani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
 
-void	free_mats(t_fdf *mats)
+void	print_nbr(t_fdf *mats, int x, int y, int nbr)
 {
-	int	i;
+	char	*str;
 
-	i = 0;
-	while (i < mats->area)
-	{
-		nml_mat_free(mats->vecs[i]);
-		i++;
-	}
-	free(mats->vecs);
+	str = ft_itoa(nbr);
+	mlx_string_put(mats->mlx, mats->win, x, y, 0x000000, str);
+	free (str);
+}
+
+void	print_str(t_fdf *mats, int x, int y, char *str)
+{
+	mlx_string_put(mats->mlx, mats->win, x, y, 0x000000, str);
 }

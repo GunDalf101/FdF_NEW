@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   fdf_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbennani <mbennani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 06:00:06 by mbennani          #+#    #+#             */
-/*   Updated: 2023/01/23 00:57:47 by mbennani         ###   ########.fr       */
+/*   Updated: 2023/01/23 00:59:07 by mbennani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
 
 int	changeback(int keycode, t_fdf *mats)
 {
@@ -47,10 +47,30 @@ int	colorseve(int keycode, t_fdf *mats)
 
 int	key_hooks(int keycode, t_fdf *mats)
 {
+	if (keycode == 13 || keycode == 1)
+		rotationx(keycode, mats);
+	if (keycode == 2 || keycode == 0)
+		rotationy(keycode, mats);
+	if (keycode == 14 || keycode == 12)
+		rotationz(keycode, mats);
+	if (keycode >= 123 && keycode <= 126)
+		translation(keycode, mats);
+	if (keycode == 6 || keycode == 8)
+		zoom(keycode, mats);
+	if (keycode == 48)
+		isoview(keycode, mats);
+	if (keycode == 7)
+		xview(keycode, mats);
+	if (keycode == 16)
+		yview(keycode, mats);
+	if (keycode > 81 && keycode <= 89)
+		changeback(keycode, mats);
+	if (keycode > 17 && keycode < 24)
+		colorseve(keycode, mats);
 	if (keycode == 53)
 		return (mlx_destroy_image(mats->mlx, mats->img.img), \
 		mlx_destroy_window(mats->mlx, mats->win), exit(0), 1);
-	return (0);
+	return (vector_trans(mats), draw_frame(mats), 0);
 }
 
 void	val_init(t_fdf *mats)

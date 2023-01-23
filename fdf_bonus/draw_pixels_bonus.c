@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_pixels.c                                      :+:      :+:    :+:   */
+/*   draw_pixels_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbennani <mbennani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 14:48:36 by mbennani          #+#    #+#             */
-/*   Updated: 2023/01/23 00:48:21 by mbennani         ###   ########.fr       */
+/*   Updated: 2023/01/22 23:23:17 by mbennani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
 
 void	my_mlx_pixel_put(t_data *data, int xi, int yi, int color)
 {
@@ -103,4 +103,9 @@ void	draw_frame(t_fdf *mats)
 	while (++mats->drawer.i < mats->area - mats->width + 1)
 		put_y(mats);
 	mlx_put_image_to_window(mats->mlx, mats->win, mats->img.img, 0, 0);
+	epic_spellbook(mats);
+	mlx_string_put(mats->mlx, mats->win, 150, 437, \
+	0xFF0000, "!! MORE FEATURES WILL BE ADDED NEXT RELEASE !!");
+	mlx_string_put(mats->mlx, mats->win, XWIN - 300, \
+	YWIN - 30, 0xFFFF00, "Y0U SHAAAALL N00T PAAASSS!!");
 }
